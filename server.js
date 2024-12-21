@@ -4,7 +4,7 @@ const app = express();
 const port = 8000;
 
 app.use(cors()); // Povolit všechny domény (prozatím)
-app.use(express.static('public'));
+app.use(express.static('.'));  // Servíruje soubory z kořenového adresáře
 app.use(express.json());
 
 let message = 'Initial message';
