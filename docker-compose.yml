@@ -1,20 +1,17 @@
-version "3"
-
+version: '3'
 services:
-    web:
-        image: node.js
-        build: .
-        ports: :
-            - "8000:8000"
-        environment:
-            - NODE_ENV=production
-        volumes:
-            - .:/app
-        deploy:
-            replies: 3
-            update_config:
-                parallelism: 2
-                delay: 10s
-            restart_policy:
-            condition: on-failure          
-                
+  web:
+    image: myapp:latest  # Místní obraz
+    ports:
+      - "8000:8000"
+    environment:
+      - NODE_ENV=production
+    volumes:
+      - .:/app
+    deploy:
+      replicas: 3
+      update_config:
+        parallelism: 2
+        delay: 10s
+      restart_policy:
+        condition: on-failure
