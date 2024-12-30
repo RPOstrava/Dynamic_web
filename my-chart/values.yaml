@@ -1,0 +1,31 @@
+replicaCount: 1
+
+image:
+  repository: my-app-image           # Nahraďte vlastním Docker image
+  tag: latest                        # Verze image
+  pullPolicy: IfNotPresent
+
+service:
+  type: ClusterIP                    # Typ služby, defaultně ClusterIP
+  port: 8080                         # Port, na kterém aplikace běží
+
+resources: 
+  limits:
+    cpu: 100m
+    memory: 128Mi
+  requests:
+    cpu: 100m
+    memory: 128Mi
+
+serviceAccount:
+  create: true    # Nastavte na true, pokud chcete, aby byl vytvořen ServiceAccount
+  name: ""        # Pokud nechcete definovat konkrétní název, nechte prázdné
+
+ingress:
+  enabled: false  # Nastavte na false, pokud nechcete použít Ingress
+
+autoscaling:
+  enabled: false  # Nastavte na true, pokud chcete použít autoscaling
+  minReplicas: 1  # Minimální počet replik (pokud je autoscaling povolen)
+  maxReplicas: 5  # Maximální počet replik (pokud je autoscaling povolen)
+  targetCPUUtilizationPercentage: 80  # Cílová hodnota CPU pro autoscaling
